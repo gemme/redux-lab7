@@ -3,9 +3,9 @@ import ListItem from "./ListItem";
 const ImageList = (props) => {
   return (
     <div className="ui relaxed divided selection list">
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      {props.images.map((image) =>{
+        return <ListItem key={image.id} img={image} onSelectedImage={props.onSelectedImage}/>
+      })}
     </div>
   );
 };

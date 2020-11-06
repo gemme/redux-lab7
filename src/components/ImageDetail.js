@@ -1,19 +1,19 @@
 import React from "react";
 const ImageDetail = (props) => {
-  const { img } = props;
+  const { image } = props;
   return (
     <div className="ui card">
       <div className="image">
-        {img === undefined ? (
+        {image === undefined ? (
           <div className="ui placeholder">
             <div className="square image"></div>
           </div>
         ) : (
-          <img alt="alt" src={img.url_s} />
+          <img alt="alt" src={image.url_s} />
         )}
       </div>
       <div className="content">
-        {img === undefined ? (
+        {image === undefined ? (
           <div className="ui placeholder">
             <div className="header">
               <div className="very short line"></div>
@@ -22,20 +22,20 @@ const ImageDetail = (props) => {
           </div>
         ) : (
           <a href="/" className="header">
-            {img.id}
+            {image.id}
           </a>
         )}
 
         <div className="meta">
-          {img === undefined ? (
+          {image === undefined ? (
             <div className="ui placeholder">
               <div className="very short line"></div>
             </div>
           ) : (
-            <span className="date">{img.date}</span>
+            <span className="date">{image.date}</span>
           )}
         </div>
-        <div className="description">{img === undefined ? "" : img.title}</div>
+        <div className="description">{image === undefined ? "" : image.title}</div>
       </div>
     </div>
   );

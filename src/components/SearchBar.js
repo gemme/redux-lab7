@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = { term: "" };
+    this.onInputChange = this.onInputChange.bind(this);
   }
+
+  onInputChange(value){
+    this.setState({
+      term: value
+    });
+  }
+
   render() {
     return (
       <center>
@@ -14,7 +23,11 @@ class SearchBar extends Component {
             value={this.state.term}
             onChange={(event) => this.onInputChange(event.target.value)}
           />
-          <button className="ui button">Search</button>
+          <button className="ui button" onClick={
+            async () => {
+              await this.props.searchData(this.state.term);
+            }
+          }>Search</button>
         </div>
       </center>
     );

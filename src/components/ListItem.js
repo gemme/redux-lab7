@@ -13,11 +13,11 @@ const ListItem = (props) => {
   }
 
   return (
-    <div className="item">
+    <div className="item" onClick={() => props.onSelectedImage(img)}>
       <img className="ui avatar image" alt={img.id} src={img.url_s} />
 
       <div className="content">
-        <a href="/" className="header">
+        <a className="header">
           {img.id}
         </a>
         <div className="description">{img.title}</div>

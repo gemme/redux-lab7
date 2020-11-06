@@ -1,4 +1,7 @@
 import React from "react";
+import {selectImage} from '../actions';
+import {connect} from 'react-redux';
+
 const ListItem = (props) => {
   const { img } = props;
   if (img === undefined) {
@@ -13,7 +16,7 @@ const ListItem = (props) => {
   }
 
   return (
-    <div className="item" onClick={() => props.onSelectedImage(img)}>
+    <div className="item" onClick={() => props.selectImage(img)}>
       <img className="ui avatar image" alt={img.id} src={img.url_s} />
 
       <div className="content">
@@ -25,4 +28,16 @@ const ListItem = (props) => {
     </div>
   );
 };
-export default ListItem;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    selectImage: (img) => dispatch(selectImage(img))
+  }
+}
+
+const mapStateToProps = (state) => {
+  return { }
+ }
+ 
+ 
+export default connect(mapStateToProps, mapDispatchToProps )(ListItem);

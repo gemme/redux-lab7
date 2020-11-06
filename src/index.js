@@ -4,6 +4,9 @@ import SearchBar from "./components/SearchBar";
 import ImageList from "./components/ImageList";
 import ImageDetail from "./components/ImageDetail";
 import {executeSearch} from './components/util';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './reducers';
 
 const App = () => {
   const [imageSelected, setImageSelected] = useState(undefined);
@@ -15,16 +18,14 @@ const App = () => {
     setImages(data.photos.photo);
     setImageSelected(data.photos.photo[0]);
   }, []);
-
+  
   const searchData = async(value) => {
     const data = await executeSearch(value);
     //images: response.data.photos.photo,
     //selectedImage: response.data.photos.photo[0]
     setImages(data.photos.photo);
   }
-  const onSelectedImage = image => {
-    setImageSelected(image);
-  }
+
   return (
     <div className="ui grid">
       <div className="row">
@@ -35,20 +36,25 @@ const App = () => {
       <div className="row">
         <div className="nine wide column">
           <center>
-            <ImageDetail image={imageSelected}/>
+            <ImageDetail imageSelected={imageSelected}/>
           </center>
         </div>
         <div className="seven wide column">
-          <ImageList images={images} onSelectedImage={onSelectedImage}/>
+          <ImageList images={images} />
         </div>
       </div>
     </div>
   );
 };
 
+
+const store = createStore(reducers);
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
+

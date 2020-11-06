@@ -4,7 +4,7 @@ const ImageList = (props) => {
   return (
     <div className="ui relaxed divided selection list">
       {props.images.map((image) =>{
-        return <ListItem key={image.id} img={image} onSelectedImage={props.onSelectedImage}/>
+        return <ListItem key={image.id} img={image}/>
       })}
     </div>
   );

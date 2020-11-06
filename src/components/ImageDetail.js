@@ -1,19 +1,23 @@
 import React from "react";
+import { connect } from 'react-redux';
+
 const ImageDetail = (props) => {
-  const { image } = props;
+  console.log('ImageDetail', props)
+  const { image, imageSelected } = props;
+  const img = image || imageSelected;
   return (
     <div className="ui card">
       <div className="image">
-        {image === undefined ? (
+        {(img) === undefined ? (
           <div className="ui placeholder">
             <div className="square image"></div>
           </div>
         ) : (
-          <img alt="alt" src={image.url_s} />
+          <img alt="alt" src={img?.url_s} />
         )}
       </div>
       <div className="content">
-        {image === undefined ? (
+        {img === undefined ? (
           <div className="ui placeholder">
             <div className="header">
               <div className="very short line"></div>
@@ -22,22 +26,27 @@ const ImageDetail = (props) => {
           </div>
         ) : (
           <a href="/" className="header">
-            {image.id}
+            {img?.id}
           </a>
         )}
 
         <div className="meta">
-          {image === undefined ? (
+          {img === undefined ? (
             <div className="ui placeholder">
               <div className="very short line"></div>
             </div>
           ) : (
-            <span className="date">{image.date}</span>
+            <span className="date">{img?.date}</span>
           )}
         </div>
-        <div className="description">{image === undefined ? "" : image.title}</div>
+        <div className="description">{img === undefined ? "" : img?.title}</div>
       </div>
     </div>
   );
 };
-export default ImageDetail;
+
+const mapStateToProps = (state) => {
+  return { image: state.selectedImage }
+ }
+ 
+export default connect(mapStateToProps)(ImageDetail);
